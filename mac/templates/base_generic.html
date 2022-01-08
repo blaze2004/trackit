@@ -27,13 +27,11 @@
                 <a href="/" class="logo"><img src="{% static 'images/mac-logo.png' %}" alt="" width="64" height="70" /></a>
                 {% load socialaccount %}
                 {% if user.is_authenticated %}
-                <p>Welcome {{ user.id }} !!!</p>
+                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
                 {% else %}
                 <a href="{% provider_login_url 'google' %}" class="nav-link">Signup</a>
                 <a href="/" class="nav-link">Login</a>
                 {% endif %}
-
-                
                 <!-- <a href="/" class="nav-link"><i class="fas fa-user-tie fa-2x"></i></a> -->
             </nav>
 

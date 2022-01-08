@@ -5,6 +5,8 @@ env/
 .env
 *.sqlite3
 staticfiles
+# settings file
+macweb/settings.py
 # Database
 db.sqlite3
 # Editor directories and files
