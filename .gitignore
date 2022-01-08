@@ -1,0 +1,13 @@
+# Distribution / packaging
+.Python
+venv/
+env/
+*.sqlite3
+# Database
+db.sqlite3
+# Editor directories and files
+.vscode
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
