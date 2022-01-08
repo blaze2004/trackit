@@ -3,6 +3,7 @@
 venv/
 env/
 *.sqlite3
+staticfiles
 # Database
 db.sqlite3
 # Editor directories and files
