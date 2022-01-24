@@ -5,10 +5,11 @@ env/
 .env
 *.sqlite3
 staticfiles
-# settings file
-macweb/settings.py
+# local setup settings file
+localsetup
+mac/migrations
 # Database
-db.sqlite3
+mac.sql
 # Editor directories and files
 .vscode
 # Byte-compiled / optimized / DLL files

@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %} {% block stylesheet %}{% load static %}
+
+<link href="{% static 'css/save.css' %}" rel="stylesheet" /> {% endblock %} {% block title %}
+
+<title>Attendance for {{ meet_code }}</title>
+
+{% endblock %} {% block content %}
+
+<div class="report-header">
+    <div class="report-bg"></div>
+    <div class="report-head"></div>
+    <span class="report-title">Attendance Report<br><hr class="dash"></span>
+    <span class="meet-data" style="top: 370px;">Meet Code : {{ meet_code }}</span>
+    <span class="meet-data" style="top: 417px;">Duration : {{ meet_duration }} ({{ start_time }} - {{ stop_time }})</span>
+    <span class="meet-data" style="top: 464px;">Date : {{ date }}</span>
+    <span class="meet-data" style="top: 511px;">Participants : {{ participants }}</span>
+</div>
+{% endblock %}

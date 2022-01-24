@@ -3,10 +3,13 @@
 
 <head>
     {% block title %}
-    <title>Meet Attendance Collector</title>{% endblock %}
+    <title>Meet Attendance Collector</title>
+    {% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
 
     <!-- Add additional CSS in static file -->
     {% load static %}
@@ -16,28 +19,44 @@
     <!-- Add additional JS in static file -->
     <script defer src="{% static 'js/base_generic.js' %}"></script>
     {% block stylesheet %} {% endblock %}
+
 </head>
 
 <body>
 
     <header>
-
-        <div class="container">
-            <a href="/" class="logo"><img src="{% static 'images/mac-logo.png' %}" alt="" width="70" height="76" /></a>
-            <nav>
-                {% load socialaccount %} {% if user.is_authenticated %}
-                <a href="{% url 'dashboard' %}" tyle="background: transparent;outline: none;border: none; "><img src="{{ user.socialaccount_set.all.0.get_avatar_url }} " alt="profile " width="54 " height="54 " /></a>
-                <a id="user_id" style="display: none;">{{ user.id }}</a> {% else %}
-                <a id="user_id" style="display: none;">-1</a>
-                <a href="{% provider_login_url 'google' %} " class="nav-link ">Signup</a>
-                <a href="{% provider_login_url 'google' %} " class="nav-link ">Login</a> {% endif %}
-            </nav>
-
+        <div style="width: 90%;display: flex;justify-content: space-between;margin: 0 auto;">
+            <a href="/">
+                <div class="logo"></div>
+            </a>
+            {% load socialaccount %} {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %} "><img style="background: transparent;outline: none;border: none;float: right; position: absolute;top: 25px;right: 72px; border-radius: 50%;" src="{{ user.socialaccount_set.all.0.get_avatar_url }} " alt="profile " width="60" height="60" /></a>
+            {% else %}
+            <div>
+                <a href="{% provider_login_url 'google' %} " style="text-decoration: none;"><button class="login-btn">Log in</button></a>
+                <a href="{% provider_login_url 'google' %} " style="text-decoration: none;"><button class="signup-btn" value="Sign up">Sign up</button></a>
+            </div>
+            {% endif %}
         </div>
 
     </header>
 
     {% block content %}{% endblock %}
+    <div style="width: 100%;height: 0;border:.1px solid white;background: white;"></div>
+    <footer>
+        <div style="width: 80%;display: flex;justify-content: space-between;margin: 0 auto;margin-top: 1%;margin-bottom: 1%;">
+            <a href="/">
+                <div class="logo"></div>
+            </a>
+            <div>
+                <a href=""><button class="login-btn" style="font-size: 15px;color: white;">Docs</button></a>
+                <a href="https://github.com/blaze2004"><button class="login-btn" style="font-size: 15px;color: white;">Github</button></a>
+                <a href=""><button class="login-btn" style="font-size: 15px;color: white;">Developers</button></a>
+                <a href=""><button class="login-btn" style="font-size: 15px;color: white;">Donate</button></a>
+                <a href="mailto:shubhamtiwaripython2004@gnail.com"><button class="login-btn" style="font-size: 15px;color: white;">Contact Us</button></a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 
