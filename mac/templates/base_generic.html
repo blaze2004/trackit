@@ -14,6 +14,7 @@
     <!-- Add additional CSS in static file -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base_generic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/mac-logo.png' %}">
 
     <!-- Add additional JS in static file -->
@@ -30,8 +31,7 @@
                 <div class="logo"></div>
             </a>
             {% load socialaccount %} {% if user.is_authenticated %}
-            <a href="{% url 'dashboard' %} "><img style="background: transparent;outline: none;border: none;float: right; position: absolute;top: 25px;right: 72px; border-radius: 50%;" src="{{ user.socialaccount_set.all.0.get_avatar_url }} " alt="profile " width="60" height="60" /></a>
-            {% else %}
+            <a href="{% url 'dashboard' %} "><i class="fa fa-user" aria-hidden="true"></i></a> {% else %}
             <div>
                 <a href="{% provider_login_url 'google' %} " style="text-decoration: none;"><button class="login-btn">Log in</button></a>
                 <a href="{% provider_login_url 'google' %} " style="text-decoration: none;"><button class="signup-btn" value="Sign up">Sign up</button></a>
