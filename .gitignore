@@ -7,7 +7,6 @@ env/
 staticfiles
 # local setup settings file
 localsetup
-mac/migrations
 # Database
 mac.sql
 # Editor directories and files
