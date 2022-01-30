@@ -12,8 +12,7 @@ function save_data() {
 
         $.ajax({
 
-            // url: "https://trackitnow.pythonanywhere.com/mac/save-attendance/",
-            url: "https://trackit-webapp.herokuapp.com/mac/save-attendance/",
+            url: "https://trackitnow.pythonanywhere.com/mac/save-attendance/",
             type: "POST",
             data: {
                 'latest_meet_attendance': _data
@@ -23,12 +22,9 @@ function save_data() {
                 var record_id = response['record_id'];
                 localStorage.removeItem('latest_meet_attendance');
                 console.log('Attendance saved to database.');
-                if (window.location.href == 'https://trackit-webapp.herokuapp.com/mac/save/') {
-                    window.location.href = 'https://trackit-webapp.herokuapp.com/mac/report-view/?id=' + record_id;
+                if (window.location.href == 'https://trackitnow.pythonanywhere.com/mac/save/') {
+                    window.location.href = 'https://trackitnow.pythonanywhere.com/mac/report-view/?id=' + record_id;
                 }
-                // if (window.location.href == 'https://trackitnow.pythonanywhere.com/mac/save/') {
-                //     window.location.href = 'https://trackitnow.pythonanywhere.com/mac/report-view/?id=' + record_id;
-                // }
             },
             error: function(response) {
                 console.log(response);

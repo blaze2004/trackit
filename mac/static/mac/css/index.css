@@ -31,3 +31,11 @@
     opacity: 1;
     text-align: center;
 }
+
+.image-box {
+    border-radius: 1rem;
+    background: linear-gradient(to top, #B65325, #9C2D36);
+    padding: 2rem;
+    border: none;
+    outline: none;
+}
