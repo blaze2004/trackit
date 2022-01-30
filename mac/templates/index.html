@@ -5,7 +5,10 @@
 
     <span class="intro-title">The Attendance Tracker tool you’ll enjoy using</span>
     <span class="intro-desc" style="color: #A39B8E;">Trackit is built to automate the task of taking attendance in online classes.</span>
-    <a href="{% url 'account_signup' %}"><button class="signup" value="Sign up for free →">Sign up for free →</button></a>
+    <div style="display: flex;justify-content: center;">
+        <a href="{% url 'account_signup' %}"><button class="signup" value="Sign up for free →">Sign up for free →</button></a>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/trackit"><button class="signup" value="Get Firefox Extension">Get Firefox Extension</button></a>
+    </div>
 </div>
 
 <div style="background: #161819;width: 100%;padding: 8%; display: grid;grid-template-columns: repeat(3,1fr);gap: 30px;font-size:xx-large;">
@@ -69,6 +72,9 @@
 <div style="display: flex;flex-direction: column;justify-content: center;margin-top: 10%;align-items: center;height: 60vh;margin-bottom: 5%;">
 
     <span class="intro-title" style="font-size: 50px;">Get started with Trackit today.</span>
-    <span class="intro-desc" style="font-size: 25px;">Trackit provides deep insights of the attendance of online classes with great analysis tools.</span>
-    <a href="{% url 'account_signup' %}"><button class="signup" value="Sign up for free →">Sign up for free →</button></a>
+    <span class="intro-desc" style="font-size: 25px;color: #A39B8E;">Trackit provides deep insights of the attendance of online classes with great analysis tools.</span>
+    <div style="display: flex;justify-content: center;">
+        <a href="{% url 'account_signup' %}"><button class="signup" value="Sign up for free →">Sign up for free →</button></a>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/trackit/"><button class="signup" value="Get Firefox Extension">Get Firefox Extension</button></a>
+    </div>
 </div>{% endblock %}
