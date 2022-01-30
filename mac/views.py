@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -19,6 +20,20 @@ def time_diff(start, end):
         assert end > start
         return end - start
 
+def duration(meet_duration):
+    if meet_duration.seconds//3600 == 0:
+        if meet_duration.seconds//60 == 0:
+            meet_duration = "Less than 1 Minute"
+        else:
+            meet_duration = str(meet_duration.seconds//60)+" Minutes"
+    else:
+        if meet_duration.seconds//60 == 0:
+            meet_duration = str(meet_duration.seconds//3600)+" Hours"
+        else:
+            meet_duration = str(meet_duration.seconds//3600)+" Hours "+str(meet_duration.seconds//60) + " Minutes"
+    
+    return meet_duration
+
 def index(request):
     """View function for home page of site."""
 
@@ -29,50 +44,35 @@ def index(request):
 def dashboard(request):
     """View function for user dashboard page."""
 
-    return render(request, 'dashboard.html')
+    query = Attendance_Record.objects.filter(user_id= request.user)
+    
+    if query.exists():
+        
+        attendance_list = []
+        
+        for i in range(0,len(query)):
+            attendance_list.append((i+1, query[i].meet_code, query[i].date.strftime("%d %b, %Y"), duration(time_diff(query[i].start_time,query[i].stop_time)),  len(query[i].student_names), query[i].id))
+
+        context = {"Attendance_record": attendance_list}
+        
+    else:
+        context = {"Attendance_record": "None"}
+
+    return render(request, 'dashboard.html', context=context)
 
 @login_required
 def save(request):
     """View function for showing attendance after the meet ends."""
-    query = Attendance_Record.objects.filter(user_id = request.user)
     
-    if query.exists():
-        _query = query.latest(Concat('date', 'stop_time'))
-        
-        if _query.date == date.today():
+    return render(request, "save.html")
 
-            meet_duration = time_diff(_query.start_time,_query.stop_time)
-            if meet_duration.seconds//3600 == 0:
-                if meet_duration.seconds//60 == 0:
-                    meet_duration = "Less than 1 Minute"
-                else:
-                    meet_duration = str(meet_duration.seconds//60)+" Minutes"
-            else:
-                if meet_duration.seconds//60 == 0:
-                    meet_duration = str(meet_duration.seconds//3600)+" Hours"
-                else:
-                    meet_duration = str(meet_duration.seconds//3600)+" Hours "+str(meet_duration.seconds//60) + " Minutes"
-
-            latest_meet_attendance = {
-                "meet_code": _query.meet_code,
-                "start_time": _query.start_time.strftime("%I:%M %p"),
-                "stop_time": _query.stop_time.strftime("%I:%M %p"),
-                "date": _query.date.strftime("%m/%d/%Y"),
-                "meet_duration": meet_duration,
-                "attendance": zip(_query.student_names, _query.join_time, _query.attended_duration),
-                "participants": len(_query.student_names)
-            }
-
-            return render(request, "save.html", context=latest_meet_attendance)
-
-    return redirect(index)
 
 @csrf_exempt
 def save_to_database(request):
     """View function for saving attendance to database."""
 
-    if request.method == "POST":
-        
+    if (request.method == "POST") and (request.user.is_authenticated):
+
         attendance_details = json.loads(request.POST.get('latest_meet_attendance'))
         attendance = Attendance_Record()
         attendance.meet_code = attendance_details['meet_code']
@@ -85,18 +85,47 @@ def save_to_database(request):
 
         for student in attendance_details['student_names']:
             result = Student.objects.filter(name=student)
-            print(type(result))
             present_students.append(result)
+
+        att = attendance_details['attended_duration']
+        for i in range(len(att)):
+            att[i] = (att[i]/attendance_details['meet_duration'])*100
 
         attendance.student_names = attendance_details['student_names']
         attendance.join_time = attendance_details['join_time']
-        attendance.attended_duration = attendance_details['attended_duration']
-
+        attendance.attended_duration = att
+        
         try:
             attendance.save()
             print('Attendance successfully saved to database.')
-            return JsonResponse({"status": "ok"}, status=200)
+            return JsonResponse({"record_id": attendance.pk}, status=200)
         except Exception:
             return JsonResponse({"status":"Failed"}, status=503)
     else:
         return JsonResponse({"status":"Failed"}, status=503)
+
+@login_required
+@csrf_exempt
+def report_view(request):
+    """View function for showing attendance report."""
+
+    report_id = request.GET.get('id', -1)
+    
+    if report_id == -1:
+        return redirect(index)
+       
+    _query = Attendance_Record.objects.filter(id=report_id).first()
+
+    s_no = range(1,len(_query.student_names)+1)
+
+    context = {
+        "meet_code": _query.meet_code,
+        "start_time": _query.start_time.strftime("%I:%M %p"),
+        "stop_time": _query.stop_time.strftime("%I:%M %p"),
+        "date": _query.date.strftime("%d %b, %Y"),
+        "meet_duration": duration(time_diff(_query.start_time,_query.stop_time)),
+        "attendance": zip(s_no,_query.student_names, _query.join_time, _query.attended_duration),
+        "participants": len(_query.student_names)
+    }
+
+    return render(request, 'report_view.html', context=context)
