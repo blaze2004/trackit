@@ -8,4 +8,5 @@ urlpatterns = [
     path('save/', views.save, name='save'),
     path('save-attendance/', views.save_to_database, name='save_attendance'),
     path('report-view/', views.report_view, name='report_view'),
+    path('docs/', views.docs, name='docs'),
 ]

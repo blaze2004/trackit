@@ -138,3 +138,8 @@ def report_view(request):
     }
 
     return render(request, 'report_view.html', context=context)
+
+def docs(request):
+    """View function for docs page."""
+    
+    return render(request, 'docs.html')
