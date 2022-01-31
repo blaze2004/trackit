@@ -6,7 +6,7 @@
 
 {% endblock %} {% block content %}{% load socialaccount %}
 <div class="container-box" style="display: flex;justify-content: space-between;">
-    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}</span> {% load i18n %}
+    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }}</span> {% load i18n %}
     <form method="post" action="{% url 'account_logout' %}">
         {% csrf_token %} {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
