@@ -28,6 +28,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Participants</th>
                     <th scope="col">View Report</th>
+                    <th scope="col">Delete Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,12 @@
                         <form method="GET" action="{% url 'report_view' %}">
                             <input type="hidden" name="id" value="{{ record_id }}" />
                             <button type=" submit " class="signup-btn ">Report</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="GET" action="{% url 'delete_record' %}">
+                            <input type="hidden" name="id" value="{{ record_id }}" />
+                            <button type="submit" class="signup-btn">Delete</button>
                         </form>
                     </td>
                 </tr>{% endfor %}{% endif %}

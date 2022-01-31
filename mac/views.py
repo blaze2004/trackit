@@ -143,3 +143,23 @@ def docs(request):
     """View function for docs page."""
     
     return render(request, 'docs.html')
+
+def privacy_policy(request):
+    """View function for privacy policy page."""
+    
+    return render(request, 'privacy_policy.html')
+
+def delete_record(request):
+    """View function for deleting attendance record."""
+    report_id = request.GET.get('id', -1)
+    
+    if report_id == -1:
+        return redirect(index)
+    
+    _query = Attendance_Record.objects.filter(id=report_id).first()
+    
+    try:
+        _query.delete()
+        return redirect(dashboard)
+    except Exception:
+        return redirect(dashboard)
