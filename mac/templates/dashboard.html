@@ -7,11 +7,14 @@
 {% endblock %} {% block content %}{% load socialaccount %}
 <div class="container-box" style="display: flex;justify-content: space-between;">
     <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }}</span> {% load i18n %}
-    <form method="post" action="{% url 'account_logout' %}">
-        {% csrf_token %} {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
-        <button class="signup-btn" type="submit">Logout</button>
-    </form>
+    <div style="display: flex;flex-direction: column;align-items: center;">
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %} {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+            <button class="signup-btn" type="submit">Logout</button>
+        </form>
+        <a href="{% url 'account_email' %}"><button class="signup-btn" style="width: fit-content;">Email Settings</button></a>
+    </div>
 </div>
 
 <div class="container-box">
