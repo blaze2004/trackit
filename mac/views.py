@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -75,9 +74,19 @@ def save_to_database(request):
 
         attendance_details = json.loads(request.POST.get('latest_meet_attendance'))
         attendance = Attendance_Record()
+        if ('am' in attendance_details['start_time'].lower()):
+            attendance_details['start_time'] = attendance_details['start_time'].replace('am', '')
+        elif  'pm' in attendance_details['start_time'].lower():
+            attendance_details['start_time'] = attendance_details['start_time'].replace('pm', '')
+
+        if ('am' in attendance_details['stop_time'].lower()):
+            attendance_details['stop_time'] = attendance_details['stop_time'].replace('am', '')
+        elif  'pm' in attendance_details['stop_time'].lower():
+            attendance_details['stop_time'] = attendance_details['stop_time'].replace('pm', '')
+
         attendance.meet_code = attendance_details['meet_code']
-        attendance.start_time = attendance_details['start_time']
-        attendance.stop_time = attendance_details['stop_time']
+        attendance.start_time = attendance_details['start_time'].strip(' ')
+        attendance.stop_time = attendance_details['stop_time'].strip(' ')
         attendance.date = datetime.strptime(attendance_details['date'], "%d/%b/%Y").date()
         attendance.user_id = request.user
 
