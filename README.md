@@ -8,6 +8,10 @@ The extension records attendance automatically when you are in a meet and saves 
 
 Get the extension on [https://addons.mozilla.org/en-US/firefox/addon/trackit](https://addons.mozilla.org/en-US/firefox/addon/trackit)
 
+## Donate
+
+[https://www.buymeacoffee.com/blaze2004]()
+
 ### Images 🚀
 
 ---
