@@ -128,6 +128,7 @@ def report_view(request):
     s_no = range(1,len(_query.student_names)+1)
 
     context = {
+        "id": report_id,
         "meet_code": _query.meet_code,
         "start_time": _query.start_time.strftime("%I:%M %p"),
         "stop_time": _query.stop_time.strftime("%I:%M %p"),
