@@ -98,7 +98,7 @@ def save_to_database(request):
 
         att = attendance_details['attended_duration']
         for i in range(len(att)):
-            att[i] = (att[i]/attendance_details['meet_duration'])*100
+            att[i] = round((att[i]/attendance_details['meet_duration'])*100,2)
 
         attendance.student_names = attendance_details['student_names']
         attendance.join_time = attendance_details['join_time']
