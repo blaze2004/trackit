@@ -4,7 +4,7 @@
 
 Automatically save attendance during google meet video calls.
 
-The extension records attendance automatically when you are in a meet and saves it. Once the meet is over it will open the attendance report in a new tab. You can access your saved attendance data anytime on our website [https://meetattendance.herokuapp.com](https://meetattendance.herokuapp.com).
+The extension records attendance automatically when you are in a meet and saves it. Once the meet is over it will open the attendance report in a new tab. You can access your saved attendance data anytime on our website [https://trackitnow.pythonanywhere.com](https://trackitnow.pythonanywhere.com).
 
 Get the extension on [https://addons.mozilla.org/en-US/firefox/addon/trackit](https://addons.mozilla.org/en-US/firefox/addon/trackit)
 
