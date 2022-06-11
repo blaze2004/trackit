@@ -6,7 +6,11 @@ Automatically save attendance during google meet video calls.
 
 The extension records attendance automatically when you are in a meet and saves it. Once the meet is over it will open the attendance report in a new tab. You can access your saved attendance data anytime on our website [https://trackitnow.pythonanywhere.com](https://trackitnow.pythonanywhere.com).
 
-Get the extension on [https://addons.mozilla.org/en-US/firefox/addon/trackit](https://addons.mozilla.org/en-US/firefox/addon/trackit)
+Get the extension on 
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/trackit)
+* [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/trackit-meet-attendance/chidnckliojipjihhfmjdmehaglhplcl)
+* [Google Chrome](https://chrome.google.com/webstore/detail/trackit-meet-attendance-c/aopejafeamijmefcoclhohoaggbfhcgh)
+* [Others](https://chrome.google.com/webstore/detail/trackit-meet-attendance-c/aopejafeamijmefcoclhohoaggbfhcgh)
 
 ## Donate
 
