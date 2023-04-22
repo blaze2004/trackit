@@ -1,0 +1,60 @@
+{% extends "account/base.html" %} {% load i18n %} {% block head_title %}{% trans "Signup" %}{% endblock %} {% block extra_head %}
+<style>
+    .container-box {
+        background: rgb(41, 44, 44);
+        padding: 3%;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        margin: 8% auto;
+        justify-content: center;
+        align-self: center;
+        width: fit-content;
+        color: white;
+    }
+
+    body {
+        background: rgba(5, 5, 5, 1);
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        width: 107px;
+        background: linear-gradient(to right, #364A90, #46409C);
+        color: rgba(255, 255, 255, 1);
+        border-radius: 10px;
+        overflow: hidden;
+        font-family: Roboto;
+        font-weight: Medium;
+        font-size: 20px;
+        outline: none;
+        border: none;
+        margin-left: 10px;
+        margin-top: 10px;
+        padding: 5px;
+    }
+</style> {% endblock %} {% block content %}{% load socialaccount %}
+
+<div class="container-box">
+
+    <h1>{% trans "Sign Up" %}</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a style="background: white;" class="btn btn-lg btn-google btn-block btn-outline" href="{% provider_login_url 'google' %}"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign up with Google</a>
+        </div>
+    </div>
+    <br>
+    <!-- <div class="form-group form-primary"> <input type="text" class="form-control" name="first_name" value="" placeholder="Display name" id="first_name"> </div> -->
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+        <button type="submit" class="signup-btn">{% trans "Sign Up" %} &raquo;</button>
+    </form>
+
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" style="color: rgba(116, 171, 251, 1);">sign in</a>.{% endblocktrans %}</p>
+    <br>
+    <p>By signing up you agree to recieve product update emails.</p>
+</div>
+{% endblock %}

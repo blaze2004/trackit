@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}{% load static %} {% load socialaccount %}{% block stylesheet %}
+
+<link rel="stylesheet" href="{% static 'mac/css/index.css' %}"> {% endblock %} {% block content %}
+<div style="background: #161819;width: 100%; padding: 8%;font-size:xx-large;">
+
+    <span class="intro-title">Privacy Policy</span><br><br>
+    <span class="intro-desc" style="color: #A39B8E;">
+        Our extension utilises browser local storage to store meet data. It's stored there until you login to our website.
+    For authenticated users attendance is stored in secured database. We only record attendees name, time they joined, for how long they were present and when they left the meeting. We don't share your data with anyone. You have total control over all your data.</span>
+
+</div>
+
+{% endblock %}

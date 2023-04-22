@@ -1,0 +1,113 @@
+{% extends "base_generic.html" %} {% block stylesheet %}{% load static %}
+
+<link href="{% static 'mac/css/report_view.css' %}" rel="stylesheet" />
+<link href="{% static 'mac/css/index.css' %}" rel="stylesheet" />{% endblock %} {% block title %}
+
+<title>Attendance for {{ meet_code }}</title>
+
+{% endblock %} {% block content %}
+
+<div class="report-bg">
+    <div class="report-header">
+        <a href="https://www.buymeacoffee.com/blaze2004" target="_blank">
+            <img style="border-radius: 1rem;" src="{% static 'mac/images/donate.jpeg' %}" width="100%" height="100%" />
+        </a>
+        <div style="display: flex;flex-direction: column;justify-content: space-between;">
+            <span class="report-title">Attendance Report<hr class="dash"></span>
+            <div class="meet-data" style=" display: flex;flex-direction: column;">
+                <span>Meet Code : {{ meet_code }}</span>
+                <span>Duration : {{ meet_duration }} ({{ start_time|time:"g:iA" }} - {{ stop_time|time:"g:iA" }})</span>
+                <span>Date : {{ date }}</span>
+                <span>Participants : {{ participants }}</span>
+            </div>
+
+            <button class="signup" onclick="ExportToExcel('xlsx','{{ record_id }}.xlsx','attendance_report')">Download in Excel</button>
+
+            {% if owner %}{% if shared %}
+            <a href="{% url 'share' record_id %}"><button class="signup" value="Share">Stop Sharing</button></a>
+            <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://trackitnow.pythonanywhere.com/mac/report-view/{{ id }}/" data-a2a-title="Attendance for {{ meet_code }}">
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                <a class="a2a_button_copy_link"></a>
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_email"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+            <!-- AddToAny END -->{% else %}
+            <a href="{% url 'share' record_id %}"><button class="signup" value="Share">Share</button></a>{% endif %}{% else %}
+            <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://trackitnow.pythonanywhere.com/mac/report-view/{{ id }}/" data-a2a-title="Attendance for {{ meet_code }}">
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                <a class="a2a_button_copy_link"></a>
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_email"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+            <!-- AddToAny END -->
+            {% endif %}
+        </div>
+    </div><br>
+    <div id="attendance_report">
+        <table id="meet_data" class="table" style="display:none;">
+            <tr>
+                <td>Meet Code</td>
+                <td>{{ meet_code }}</td>
+            </tr>
+            <tr>
+                <td>Duration</td>
+                <td>{{ meet_duration }} ({{ start_time|time:"g:iA" }} - {{ stop_time|time:"g:iA" }})</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>{{ date }}</td>
+            </tr>
+            <tr>
+                <td>Participants</td>
+                <td>{{ participants }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <table class="table table-dark table-striped table-hover" data-toggle="table" data-pagination="true" data-height="460" data-search="true">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Join Time</th>
+                    <th scope="col">Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sn,student,join_time,att in attendance %}
+                <tr>
+                    <th scope="row">{{ sn }}</th>
+                    <td>{{ student }}</td>
+                    <td>{{ join_time }}</td>
+                    <td>{{ att }}%</td>
+                </tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function ExportToExcel(type, fn, tableid, dl) {
+        var elt = document.getElementById(tableid);
+        var wb = XLSX.utils.table_to_book(elt, {
+            sheet: 'attendance_report'
+        });
+        return dl ?
+            XLSX.write(wb, {
+                bookType: type,
+                bookSST: true,
+                type: 'base64'
+            }) :
+            XLSX.writeFile(wb, fn || ('attendance_report.' + (type || 'xlsx')));
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "account/base.html" %} {% load i18n %} {% load account socialaccount %} {% block head_title %}{% trans "Sign In" %}{% endblock %} {% block extra_head %}
+<style>
+    .container-box {
+        background: rgb(41, 44, 44);
+        padding: 3%;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        margin: 8% auto;
+        justify-content: center;
+        align-self: center;
+        width: fit-content;
+        color: white;
+    }
+
+    body {
+        background: rgba(5, 5, 5, 1);
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        width: 107px;
+        background: linear-gradient(to right, #364A90, #46409C);
+        color: rgba(255, 255, 255, 1);
+        border-radius: 10px;
+        overflow: hidden;
+        font-family: Roboto;
+        font-weight: Medium;
+        font-size: 20px;
+        outline: none;
+        border: none;
+        margin-left: 10px;
+        margin-top: 10px;
+        padding: 5px;
+    }
+</style> {% endblock %}{% block content %}
+
+
+<!-- {% get_providers as socialaccount_providers %} {% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a> for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+    <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </ul>
+
+    <div class="login-or">{% trans 'or' %}</div>
+
+</div> -->
+<!-- {% include "socialaccount/snippets/login_extra.html" %} {% else %}
+    <p>{% blocktrans %}If you have not created an account yet, then please
+        <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    {% endif %} -->
+<div class="container-box">
+
+    <h1>{% trans "Sign In" %}</h1><br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a style="background: white;" class="btn btn-lg btn-google btn-block btn-outline" href="{% provider_login_url 'google' %}"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Log in with Google</a>
+        </div>
+    </div>
+    <br>
+
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <button class="primaryAction signup-btn" type="submit">{% trans "Sign In" %}</button>
+    </form><br>
+    <p>{% blocktrans %}Don't have an account?<a href="{{ signup_url }}" style="color: rgba(116, 171, 251, 1);">Create Now</a>.{% endblocktrans %}</p>
+
+</div>
+
+{% endblock %}

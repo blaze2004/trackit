@@ -1,0 +1,16 @@
+.container-box {
+    margin: 5%;
+    background: rgba(13, 15, 15, 1);
+    padding: 3%;
+    border-radius: 1rem;
+}
+
+.btn-group {
+    flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+    .btn-group {
+        flex-direction: row;
+    }
+}

@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}{% load static %} {% load socialaccount %}{% block stylesheet %}
+
+<link rel="stylesheet" href="{% static 'mac/css/index.css' %}"> {% endblock %} {% block content %}
+<div style="background: #161819;width: 100%; padding: 8%; display: grid;gap: 30px;font-size:xx-large;" class="grid-div">
+    <div class="image-box">
+        <img style="border-radius: 1rem;" src="{% static 'mac/images/att_report.png' %}" width="100%" height="100%">
+    </div>
+    <div>
+        <span class="intro-title">How to use trackit</span><br>
+        <span class="intro-desc" style="color: #A39B8E;">1. Add Trackit extension to your favourite browser from Trackit website homepage. <br>2. Sign up on trackit website. <br>3. Enjoy your meet without taking tension of attendance.<br>4. As your meet ends we will show you the attendance report automatically.</span>
+    </div>
+</div>
+{% endblock %}

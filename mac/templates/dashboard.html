@@ -1,0 +1,71 @@
+{% extends "base_generic.html" %} {% block stylesheet %}{% load static %}
+
+<link href="{% static 'mac/css/dashboard.css' %}" rel="stylesheet" />
+<link href="{% static 'mac/css/index.css' %}" rel="stylesheet" />
+{% endblock %} {% block title %}
+
+<title>Dashboard</title>
+
+{% endblock %} {% block content %}{% load socialaccount %}
+<div class="container-box btn-group" style="display: flex;justify-content: space-between;">
+    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }}</span> {% load i18n %}
+    <div style="display: flex;flex-direction: column;align-items: center;">
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %} {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+            <button class="signup-btn" type="submit">Logout</button>
+        </form>
+        <a href="{% url 'account_email' %}"><button class="signup-btn" style="width: fit-content;">Email Settings</button></a>
+    </div>
+</div>
+
+<div class="container-box">
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Meet Code</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Participants</th>
+                    <th scope="col">View Report</th>
+                    <th scope="col">Delete Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if Attendance_record == "None" and AttendanceReports == "None" %}
+                <tr>
+                    <td colspan="7" style="text-align: center;">Nothing to show</td>
+                </tr>{% endif %} {% if Attendance_record != "None"%} {% for sn,meet_code,date,duration,participants,record_id in Attendance_record %}
+                <tr>
+                    <th scope="row">{{ sn }}</th>
+                    <td>{{ meet_code }}</td>
+                    <td>{{ duration }}</td>
+                    <td>{{ date }}</td>
+                    <td>{{ participants }}</td>
+                    <td>
+                        <a href="{% url 'report_view' record_id %}"><button type="submit" class="signup-btn">Report</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_record' record_id %}"><button type=" submit " class="signup-btn ">Delete</button></a>
+                    </td>
+                </tr>{% endfor %}{% endif %} {% if AttendanceReports != "None" %} {% for sn,meet_code,date,duration,participants,record_id in AttendanceReports %}
+                <tr>
+                    <th scope="row">{{ sn }}</th>
+                    <td>{{ meet_code }}</td>
+                    <td>{{ duration }}</td>
+                    <td>{{ date }}</td>
+                    <td>{{ participants }}</td>
+                    <td>
+                        <a href="{% url 'viewAttendanceReport' record_id %}"><button type="submit" class="signup-btn">Report</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'deleteAttendanceReport' record_id %}"><button type=" submit " class="signup-btn ">Delete</button></a>
+                    </td>
+                </tr>{% endfor %}{% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
