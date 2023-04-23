@@ -33,6 +33,7 @@ FRONTEND_DEPLOYMENT_URL = env("DEPLOYMENT_URL")
 
 ALLOWED_HOSTS = ['trackitnow.pythonanywhere.com', f"https://{FRONTEND_DEPLOYMENT_URL}", f"http://{FRONTEND_DEPLOYMENT_URL}", FRONTEND_DEPLOYMENT_URL, 'localhost']
 
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 # Application definition
 
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'django_csv_exports',
+    'whitenoise.runserver_nostatic',
 
     # Add apps here
     'mac.apps.MacConfig',
@@ -65,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'macweb.urls'
@@ -141,6 +144,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = 'static/'
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

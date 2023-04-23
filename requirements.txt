@@ -24,3 +24,4 @@ psycopg2-binary
 django-environ
 django_csv_exports
 mysqlclient
+django-cors-headers
