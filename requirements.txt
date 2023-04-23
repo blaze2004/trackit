@@ -20,7 +20,7 @@ requests-oauthlib
 sqlparse
 urllib3
 whitenoise
-psycopg2
+psycopg2-binary
 django-environ
 django_csv_exports
 mysqlclient
