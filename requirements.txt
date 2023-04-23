@@ -21,4 +21,4 @@ sqlparse
 urllib3
 whitenoise
 psycopg2
-environ
+django-environ
