@@ -22,3 +22,5 @@ urllib3
 whitenoise
 psycopg2
 django-environ
+django_csv_exports
+mysqlclient
