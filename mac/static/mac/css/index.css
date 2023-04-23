@@ -54,17 +54,6 @@
     grid-template-columns: repeat(1, 1fr);
 }
 
-.banner {
-  background-color: #f44336;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  border-radius: 50%; /* Add circular border */
-  width: 200px; /* Set a fixed width for the banner */
-  margin: 0 auto; /* Center the banner horizontally */
-}
-
-
 @media screen and (min-width: 768px) {
     .grid-div {
         grid-template-columns: repeat(2, 1fr);

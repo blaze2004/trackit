@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env("DEBUG")=="TRUE"
 
-ALLOWED_HOSTS = ['https://trackitnow.pythonanywhere.com', 'trackitnow.pythonanywhere.com', 'http://trackitnow.pythonanywhere.com']
+ALLOWED_HOSTS = ['trackitnow.pythonanywhere.com', env("DEPLOYMENT_URL"), 'localhost']
 
 
 # Application definition
