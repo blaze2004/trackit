@@ -27,9 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")=="TRUE"
+DEBUG = env("DEBUG") == "TRUE"
 
-ALLOWED_HOSTS = ['trackitnow.pythonanywhere.com', env("DEPLOYMENT_URL"), 'localhost']
+FRONTEND_DEPLOYMENT_URL = env("DEPLOYMENT_URL")
+
+ALLOWED_HOSTS = ['trackitnow.pythonanywhere.com', f"https://{FRONTEND_DEPLOYMENT_URL}", f"http://{FRONTEND_DEPLOYMENT_URL}", FRONTEND_DEPLOYMENT_URL, 'localhost']
 
 
 # Application definition
@@ -70,7 +72,7 @@ ROOT_URLCONF = 'macweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -172,15 +174,15 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
-ACCOUNT_LOGOUT_REDIRECT_URL ='index'
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400  # 1 day in seconds
+ACCOUNT_LOGOUT_REDIRECT_URL = 'index'
 
 LOGIN_REDIRECT_URL = 'dashboard'
-SOCIALACCOUNT_QUERY_EMAIL=True
-SOCIALACCOUNT_EMAIL_REQUIRED=True
-SOCIALACCOUNT_EMAIL_VERIFICATION=True
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = True
