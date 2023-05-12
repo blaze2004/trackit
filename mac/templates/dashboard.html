@@ -8,7 +8,7 @@
 
 {% endblock %} {% block content %}{% load socialaccount %}
 <div class="container-box btn-group" style="display: flex;justify-content: space-between;">
-    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }}</span> <br> <span id="localReportsCount"></span> {% load i18n %}
+    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }} <br> <span class="login-btn" style="color: white;width: auto;" id="localReportsCount"></span></span> {% load i18n %}
     <div style="display: flex;flex-direction: column;align-items: center;">
         <form method="post" action="{% url 'account_logout' %}">
             {% csrf_token %} {% if redirect_field_value %}
