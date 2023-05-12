@@ -8,7 +8,7 @@
 
 {% endblock %} {% block content %}{% load socialaccount %}
 <div class="container-box btn-group" style="display: flex;justify-content: space-between;">
-    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }}</span> {% load i18n %}
+    <span class="login-btn" style="color: white;width: auto;">Welcome, {{ user.first_name }} {{ user.last_name }}<br>UserName: {{ user.username }} <br>Email: {{ user.email }}</span> <br> <span id="localReportsCount"></span> {% load i18n %}
     <div style="display: flex;flex-direction: column;align-items: center;">
         <form method="post" action="{% url 'account_logout' %}">
             {% csrf_token %} {% if redirect_field_value %}
@@ -69,4 +69,30 @@
         </table>
     </div>
 </div>
+
+<script>
+    function checkReportsCount() {
+        var i, report, reports=[];
+        const query=RegExp('meet_attendance_report_');
+
+        for (i in localStorage) {
+            if (localStorage.hasOwnProperty(i)) {
+                if (i.match(query)||(!query&&typeof i==='string')) {
+                    value=JSON.parse(localStorage.getItem(i));
+                    reports.push({
+                        key: i,
+                        data: value
+                    });
+                }
+            }
+        }
+
+        const localReportsCount=document.getElementById("localReportsCount");
+        localReportsCount.innerHTML = `Reports in localStorage: ${reports.length}`;
+    }
+
+    window.addEventListener('load', function () {
+        setTimeout(checkReportsCount, 500);
+    });
+</script>
 {% endblock %}
