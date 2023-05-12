@@ -30,7 +30,7 @@ def saveAttendanceReport(request):
 
         try:
             attendanceReport.save()
-            reportUrl = f"https://trackitnow.pythonanywhere.com/view-attendance-report/{attendanceReport.slug}/"
+            reportUrl = f"https://trackit.zeabur.app/view-attendance-report/{attendanceReport.slug}/"
             return JsonResponse({"message":"Attendance report successfully saved.", "url":reportUrl}, status=200)
 
         except Exception as e:

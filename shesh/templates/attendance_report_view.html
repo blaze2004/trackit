@@ -26,7 +26,7 @@
             <!-- AddToAny BEGIN -->
             {% if owner %}{% if shared %}
             <a href="{% url 'shareAttendanceReport' slug %}"><button class="signup" value="Share">Stop Sharing</button></a>
-            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://trackitnow.pythonanywhere.com/view-attendance-report/{{ slug }}/" data-a2a-title="Attendance for {{ meetCode }}">
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://trackit.zeabur.app/view-attendance-report/{{ slug }}/" data-a2a-title="Attendance for {{ meetCode }}">
                 <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
                 <a class="a2a_button_copy_link"></a>
                 <a class="a2a_button_facebook"></a>
@@ -36,7 +36,7 @@
             <script async src="https://static.addtoany.com/menu/page.js"></script>
             <!-- AddToAny END -->{% else %}
             <a href="{% url 'shareAttendanceReport' slug %}"><button class="signup" value="Share">Share</button></a>{% endif %}{% else %}
-            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://trackitnow.pythonanywhere.com/view-attendance-report/{{ slug }}/" data-a2a-title="Attendance for {{ meet_code }}">
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://trackit.zeabur.app/view-attendance-report/{{ slug }}/" data-a2a-title="Attendance for {{ meet_code }}">
                 <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
                 <a class="a2a_button_copy_link"></a>
                 <a class="a2a_button_facebook"></a>
