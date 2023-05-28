@@ -19,6 +19,9 @@ def saveAttendanceReport(request):
             return JsonResponse({"message":"Bad Request"}, status=400)
 
         attendanceDetails = json.loads(attendanceDetails)
+        
+        for participantData in attendanceDetails["participants"]:
+            del participantData["attendance"]
 
         attendanceReport = AttendanceReport()
         attendanceReport.meetCode = attendanceDetails["meetCode"]
