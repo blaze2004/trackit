@@ -76,6 +76,9 @@ function saveAttendance() {
         if (localStorage.hasOwnProperty(i)) {
             if (i.match(query) || (!query && typeof i === 'string')) {
                 value = JSON.parse(localStorage.getItem(i));
+                for (let i=0; i<value["participants"].length; i++){
+                    delete value["participants"][i]["attendance"]
+                }
                 reports.push({
                     key: i,
                     data: value
