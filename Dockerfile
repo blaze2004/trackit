@@ -22,6 +22,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     build-essential \
     libpq-dev \
     libmariadbclient-dev \
+    default-libmysqlclient-dev pkg-config \
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev \
