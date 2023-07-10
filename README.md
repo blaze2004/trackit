@@ -26,7 +26,7 @@ Get the extension on
 
 2). Once, the meet is  over your attendance report is displayed in a new tab.
 
-no manual work required ! it's fully automatic.
+No manual work required ! it's fully automatic.
 
 ![](./mac/static/mac/images/att_report.png)
 ![](./mac/static/mac/images/chrome_ext.png)
