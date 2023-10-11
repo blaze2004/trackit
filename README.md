@@ -1,5 +1,10 @@
 # Trackit✨
 
+----
+The repository has been moved to [Visual-Brahma/trackit](https://github.com/Visual-Brahma/trackit) and its completely changed in this version. Lots of new features have been added and more coming soon. You can help us by contributing to the the new repo.
+
+----
+
 Easy, simple and automatic meet attendance collector application 🚀
 
 ###### Firefox Extension
