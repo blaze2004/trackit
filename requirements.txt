@@ -23,7 +23,6 @@ whitenoise
 psycopg2-binary
 django-environ
 django_csv_exports
-mysql-connector
-mysqlclient
+mysqlclient==1.4.6
 django-cors-headers
 Werkzeug
